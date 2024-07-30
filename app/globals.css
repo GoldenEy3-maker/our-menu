@@ -2,32 +2,129 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --background: 0 0% 100%;
+    --foreground: 224 71.4% 4.1%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71.4% 4.1%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71.4% 4.1%;
+    --primary: 262.1 83.3% 57.8%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 220 14.3% 92%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 92%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 92%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 262.1 83.3% 57.8%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 218 20% 10%;
+    --foreground: 210 20% 98%;
+    --card: 224 71.4% 4.1%;
+    --card-foreground: 210 20% 98%;
+    --popover: 224 71.4% 4.1%;
+    --popover-foreground: 210 20% 98%;
+    --primary: 263.4 70% 60.4%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 216 17% 21%;
+    --secondary-foreground: 210 20% 98%;
+    --muted: 216 17% 21%;
+    --muted-foreground: 217.9 10.6% 64.9%;
+    --accent: 216 17% 21%;
+    --accent-foreground: 210 20% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 216 17% 21%;
+    --input: 216 17% 21%;
+    --ring: 263.4 70% 50.4%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  input::-ms-reveal,
+  input::-ms-clear {
+    display: none;
+  }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  .hidden-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .hidden-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: scrollbar-color 200ms ease;
+  }
+
+  .custom-scrollbar:hover {
+    scrollbar-color: hsl(0, 0%, 60%) transparent;
+  }
+
+  .dark .custom-scrollbar:hover {
+    scrollbar-color: hsl(0, 0%, 44%) transparent;
+  }
+
+  .container-grid {
+    --padding-inline: 1rem;
+    --container-max-widht: 1400px;
+    --breakout-max-width: calc(var(--container-max-widht) * 0.15 + var(--container-max-widht));
+
+    --breakout-size: calc((var(--breakout-max-width) - var(--container-max-widht)) / 2);
+
+    display: grid;
+    grid-template-columns:
+      [full-width-start] minmax(var(--padding-inline), 1fr) [breakout-start] minmax(0, var(--breakout-size)) [container-start] min(100% - var(--padding-inline) * 2,
+        var(--container-max-widht)) [container-end] minmax(0, var(--breakout-size)) [breakout-end] minmax(var(--padding-inline),
+        1fr) [full-width-end];
+  }
+
+  .container-grid> :not(.breakout, .full-width),
+  .full-width> :not(.breakout, .full-width) {
+    grid-column: container;
+  }
+
+  .breakout {
+    grid-column: breakout;
+  }
+
+  .full-width {
+    grid-column: full-width;
+
+    display: grid;
+    grid-template-columns: inherit;
   }
 }
