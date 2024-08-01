@@ -22,6 +22,16 @@ export function Header() {
           </Button>
         </nav>
         <div className="flex items-center gap-4">
+          <Button
+            type="button"
+            variant="outline"
+            className="rounded-full group">
+            <Icons.Search className="text-xl mr-2" />
+            <span>Поиск</span>
+            <span className="rounded-md text-xs bg-secondary text-muted-foreground px-2 py-1 tracking-widest ml-6 group-hover:bg-background shadow">
+              CTRL K
+            </span>
+          </Button>
           <ThemeToggle />
         </div>
       </div>

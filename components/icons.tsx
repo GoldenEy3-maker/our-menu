@@ -2,7 +2,7 @@ import {
   TbChefHat,
   TbMoon,
   TbNotebook,
-  TbSun,
+  TbSearch,
   TbSunHigh,
 } from "react-icons/tb";
 
@@ -11,4 +11,5 @@ export const Icons = {
   Moon: TbMoon,
   SunHigh: TbSunHigh,
   Notebook: TbNotebook,
+  Search: TbSearch,
 };
